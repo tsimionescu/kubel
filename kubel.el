@@ -576,7 +576,7 @@ Use C-c C-c to kubectl apply the current yaml buffer."
   (setq dir-prefix (or
 		            (when (tramp-tramp-file-p default-directory)
 		              (with-parsed-tramp-file-name default-directory nil
-			            (format "/%s%s:%s@%s:" (or hop "") method user host)))
+			            (format "/%s%s:%s@%s#%s:" (or hop "") method user host port)))
 		            ""))
 
   (let* ((filename-without-tramp-prefix (format "/tmp/kubel/%s-%s.yaml"
@@ -849,7 +849,7 @@ P can be a single number or a localhost:container port pair."
   (let* ((dir-prefix (or
 		              (when (tramp-tramp-file-p default-directory)
 		                (with-parsed-tramp-file-name default-directory nil
-			              (format "%s%s:%s@%s|" (or hop "") method user host)))""))
+			              (format "%s%s:%s@%s#%s|" (or hop "") method user host port)))""))
          (pod (if (kubel--is-pod-view)
                   (kubel--get-resource-under-cursor)
                 (kubel--select-resource "Pods")))
@@ -866,7 +866,7 @@ P can be a single number or a localhost:container port pair."
   (let* ((dir-prefix (or
                       (when (tramp-tramp-file-p default-directory)
                         (with-parsed-tramp-file-name default-directory nil
-                          (format "%s%s:%s@%s|" (or hop "") method user host))) ""))
+                          (format "%s%s:%s@%s#%s|" (or hop "") method user host port))) ""))
          (pod (if (kubel--is-pod-view)
                   (kubel--get-resource-under-cursor)
                 (kubel--select-resource "Pods")))
@@ -884,7 +884,7 @@ P can be a single number or a localhost:container port pair."
   (let* ((dir-prefix (or
                       (when (tramp-tramp-file-p default-directory)
                         (with-parsed-tramp-file-name default-directory nil
-                          (format "%s%s:%s@%s|" (or hop "") method user host))) ""))
+                          (format "%s%s:%s@%s#%s|" (or hop "") method user host port))) ""))
          (pod (if (kubel--is-pod-view)
                   (kubel--get-resource-under-cursor)
                 (kubel--select-resource "Pods")))
